@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Thông tin cá nhân</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css" media="screen">
+		body{
+			background-color: #c2f7ea;
+			background-size: cover;
+		}
+		.container{
+			
+			padding-top: 20px;
+		}
+
+		#errorName{
+			color: red;
+		}
+			
+		#errorEmail{
+			color: red;
+		}
+		
+		#errorGender{
+			color: red;
+		}
+
+		#errorPassword{
+			color: red;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Nhập thông tin cá nhân</h1>
+	<div class="container">
+		<span style="color:red">* Bắt buộc</span><br><br>
+		<form action="" name="info" onsubmit="return validate()" method="POST">
+			<label for="name">Username: </label>
+			<input type="text" name="name" required="required"><span id="errorName" >&nbsp;*</span>
+			<br><br>
+			
+			<label for="gender">Giới tính: </label><br>
+			<input type="radio" name="gender" value="female">Nữ
+	   		<input type="radio" name="gender" value="male">Nam
+			<span id="errorGender" >&nbsp;*</span>
+			<br><br>
+
+			<label for="email">Email: </label>
+			<input type="text" name="email" required="required"><span id="errorEmail">&nbsp;*</span>
+			<br><br>
+
+			<label for="name">Password: </label>
+			<input type="password" name="password" required="required">
+			<span id="errorPassword" >&nbsp;*</span><br><br>
+			
+			<label for="description">Sở thích:</label>
+			<br><textarea name="description" id="description" cols="30" rows="10"></textarea><br><br>
+
+			<button type="submit">Submit</button>
+		</form>	
+	</div>
+	
+	<script type="text/javascript" charset="utf-8" async defer>
+	function validateRadio (radios)
+	{
+	    for (i = 0; i < radios.length; ++ i)
+	    {
+	        if (radios [i].checked) return true;
+	    }
+	    return false;
+	}
+	function validate() {
+	    //Name
+	    var x = document.forms["info"]["name"].value;
+	    if(x.length < 6){
+	    	document.getElementById('errorName').innerHTML = " * Username phải trên 6 kí tự!";
+	    }
+		//Email
+	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    var y = document.forms['info']['email'].value;
+	    if(!re.test(x)){
+	    	document.getElementById('errorEmail').innerHTML = " * Email nhập sai!";
+	    }
+
+	    //Gender
+	    if(!validateRadio(document.forms['info']['gender'])){
+	    	document.getElementById('errorGender').innerHTML = " * Chưa chọn giới tính!";
+	    }
+
+	    //Password
+	    var m = document.forms['info']['password'].value;
+	    if(m.length < 6){
+	    	document.getElementById('errorPassword').innerHTML = " * Password phải trên 6 kí tự!";
+	    	return false;
+	    }
+	}
+	</script>
+</body>
+</html>
